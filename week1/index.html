@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+
+  <body>
+    <div class="" id="message">
+      <h1>Hello react native</h1>
+      <h3 id="result"></h3>
+      <input type="number" name="number" id="number" value="" />
+      <button type="button" name="button" onclick="handleGuessBtnClick()">
+        Guess
+      </button>
+      <div id="guesses-count"></div>
+      <div id="past-guesses">
+        <h3>Past Guesses</h3>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    const correctNumber = Math.floor(Math.random() * 100);
+    console.log(`Correct ${correctNumber}`);
+    let count = 0;
+    let limitTry = 10;
+
+    function handleGuessBtnClick() {
+      count++;
+
+      const inputValue = parseInt(document.getElementById("number").value);
+      const pastGuessesTag = document.getElementById("past-guesses");
+      const guessesCountTag = document.getElementById("guesses-count");
+      const resultTag = document.getElementById("result");
+
+      if (count >= 10) {
+        guessesCountTag.innerHTML = "Sorry, you've reached the limited try";
+      } else {
+        guessesCountTag.innerHTML = `You have ${
+          limitTry - count
+        } guess(es) left`;
+      }
+
+      if (inputValue < correctNumber) {
+        resultTag.innerHTML = "Sorry your guess is too low";
+        resultTag.style.backgroundColor = "red";
+      } else if (inputValue > correctNumber) {
+        resultTag.innerHTML = "Sorry your guess is too high";
+        resultTag.style.backgroundColor = "red";
+      } else {
+        resultTag.innerHTML = "Congratulations!! You guessed correctly.";
+        resultTag.style.backgroundColor = "green";
+      }
+
+      pastGuessesTag.innerHTML += `<p> ${inputValue} </p>`;
+    }
+  </script>
+</html>
