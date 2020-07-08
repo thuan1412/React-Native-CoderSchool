@@ -36,6 +36,7 @@
 
       if (count >= 10) {
         guessesCountTag.innerHTML = "Sorry, you've reached the limited try";
+        return;
       } else {
         guessesCountTag.innerHTML = `You have ${
           limitTry - count
