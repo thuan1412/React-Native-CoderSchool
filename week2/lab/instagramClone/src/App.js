@@ -19,6 +19,8 @@ import {
 import Header from './components/Header';
 import Feed from './components/Feed';
 
+import Profile from './pages/Profile';
+
 const feedData = [
   {
     id: 1,
@@ -32,8 +34,7 @@ const feedData = [
 const App = () => {
   return (
     <View>
-      <Header />
-      <Feed feedData={feedData} />
+      <Profile />
     </View>
   );
 };
