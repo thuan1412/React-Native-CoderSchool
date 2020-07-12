@@ -3,4 +3,4 @@
 - This is the first time i use Typescript.
 
 The result will look like this:
-![](./images/assignment.gif)
+![](images/assignment.gif)
