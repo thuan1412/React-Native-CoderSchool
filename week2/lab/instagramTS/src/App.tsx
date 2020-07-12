@@ -20,11 +20,13 @@ import {
 } from 'react-native';
 
 import Home from './screens/Home';
+import Profile from './screens/Profile';
 
 const App = () => {
   return (
-    <View>
-      <Home />
+    <View style={{flex: 1}}>
+      {/* <Home /> */}
+      <Profile />
     </View>
   );
 };
