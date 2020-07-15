@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-
+import React, {useState, useEffect} from 'react';
+require('number-to-locale-string-polyfill');
 import {
   View,
   Text,
@@ -83,6 +83,7 @@ export default function App() {
   const [from, setFrom] = useState<string>('USD');
   const [to, setTo] = useState<string>('VND');
 
+  const result = from === 'USD' ? input * 23000 : input / 23000;
   return (
     <View style={styles.app}>
       <Text style={styles.textHeader}>
@@ -93,7 +94,7 @@ export default function App() {
         style={styles.input}
         autoFocus
         editable
-        onChangeText={(text) => setInput(parseFloat(text))}
+        onChangeText={(text) => setInput(parseFloat(text) || 0)}
         textAlignVertical="center"
         keyboardType="number-pad"
         placeholder="100000"
@@ -118,13 +119,15 @@ export default function App() {
       />
 
       <View style={styles.resultContainer}>
-        <Text>Current currency:</Text>
-        <Text style={styles.currencyResult}>{input}</Text>
+        <Text>Current curr1231ency:</Text>
+        <Text style={styles.currencyResult}>
+          {input.toLocaleString('it-IT', {style: 'currency', currency: from})}
+        </Text>
       </View>
       <View style={styles.resultContainer}>
         <Text>Converted currency:</Text>
         <Text style={styles.currencyResult}>
-          {from === 'USD' ? input / 23000 : input * 23000}
+          {result.toLocaleString('it-IT', {style: 'currency', currency: to})}
         </Text>
       </View>
     </View>
