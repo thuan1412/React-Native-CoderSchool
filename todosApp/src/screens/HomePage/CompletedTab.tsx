@@ -1,13 +1,29 @@
 import React, {useContext} from 'react';
-import {View, Text} from 'react-native';
-import {TodosListContext} from '../../dataProvider';
+import {View, Text, ScrollView} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 
-export default function CompletedTab() {
-  const todos = useContext(TodosListContext);
+import {TodosListContext} from '../../dataProvider';
+import TaskCard from '../../components/TaskCard';
+import {Task} from '../../type';
+
+import styles from './styles';
+
+export default function ActiveTab({navigation}) {
+  const todos = useSelector<Array<Task>>((state) => state.todos);
 
   return (
-    <View>
-      <Text>Complete</Text>
+    <View style={styles.tabScreent}>
+      <ScrollView style={styles.listContainer}>
+        {todos
+          .filter((todo: Task) => todo.completed)
+          .map((todo: Task, idx: number) => (
+            <TaskCard
+              key={todo.id}
+              todo={todo}
+              onPress={() => navigation.navigate('TaskDetail', todo)}
+            />
+          ))}
+      </ScrollView>
     </View>
   );
 }

@@ -14,30 +14,37 @@ export default function TaskCard({
   onPress: Function;
 }) {
   const dispatch = useDispatch();
-  const [isCompleted, setIsCompleted] = useState<boolean>(todo.completed);
   const bgColor = todo.completed ? 'green' : 'yellow';
-  // todo.completed = false;
+  const textColor = todo.completed ? 'white' : 'black';
+
   const styles = StyleSheet.create({
     taskCard: {
       backgroundColor: bgColor,
-      height: 30,
+      paddingLeft: 5,
+      borderRadius: 5,
+      alignItems: 'center',
+      height: 40,
       width: 250,
       flexDirection: 'row',
+      marginBottom: 10,
     },
     title: {
       fontSize: 24,
+      color: textColor,
+    },
+    switch: {
+      position: 'absolute',
+      right: 10,
     },
   });
 
   return (
-    <TouchableOpacity onPress={() => onPress} style={styles.taskCard}>
+    <TouchableOpacity style={styles.taskCard} onPress={() => onPress()}>
       <Text style={styles.title}>{todo.title}</Text>
       <Text>{todo.completed}</Text>
       <Switch
-        // style={styles.toggleTask}
-        //  onPress={() =>onPress}
+        style={styles.switch}
         onValueChange={() => {
-          // setIsCompleted((isCompleted) => !isCompleted);
           dispatch(actions.toggleTodo(todo.id));
         }}
         value={todo.completed}

@@ -6,10 +6,10 @@ export const actionTypes = {
   ADD_TODO: 'ADD_TODO',
 };
 
-const addTodo = (text: string) => {
+const addTodo = (title: string) => {
   return {
     type: actionTypes.ADD_TODO,
-    text,
+    title,
   };
 };
 
@@ -36,11 +36,11 @@ export const todos = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.ADD_TODO:
       return {
-        increment: action.increment + 1,
+        increment: state.increment + 1,
         todos: [
           ...state.todos,
           {
-            id: action.incremnt + 1,
+            id: state.increment + 1,
             title: action.title,
             completed: false,
           },
