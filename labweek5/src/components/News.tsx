@@ -1,11 +1,30 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
+
+import {NewsType} from '../type';
+
+const onReadMore = (url: string) => {
+  Linking.canOpenURL(url).then((can) => {
+    if (can) {
+      Linking.openURL(url);
+    } else {
+      console.log('Cannot open URL');
+    }
+  });
+};
 
 const styles = StyleSheet.create({
   newsContainer: {
     height: 300,
     marginHorizontal: 5,
-    marginVertical: 10,
+    paddingBottom: 10,
     borderBottomColor: 'gray',
     borderBottomWidth: 1,
     padding: 5,
@@ -29,7 +48,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function News({news}: {news: any}) {
+export default function News({news}: {news: NewsType}) {
   return (
     <View style={styles.newsContainer}>
       <View style={styles.headerContainer}>
@@ -41,7 +60,9 @@ export default function News({news}: {news: any}) {
         resizeMode="contain"
       />
       <Text>Publish: {news.publishedAt}</Text>
-      <TouchableOpacity style={styles.readMoreBtn}>
+      <TouchableOpacity
+        style={styles.readMoreBtn}
+        onPress={() => onReadMore(news.url)}>
         <Text style={{color: 'white'}}>Read More</Text>
       </TouchableOpacity>
     </View>
